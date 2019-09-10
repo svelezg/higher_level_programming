@@ -36,7 +36,7 @@ listint_t *insert_node(listint_t **head, int number)
 /* Else traverse till position or the last node */
 	while (after->next != NULL)
 	{
-		if (before->n <= number && after->n >= number)
+		if (before->n <= number && after->n > number)
 		{	before->next = new_node; /* Change the next of before node */
 			new_node->next = after;  /* point new to after */
 			return (new_node);
