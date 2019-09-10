@@ -22,8 +22,10 @@ listint_t *insert_node(listint_t **head, int number)
 	new_node = malloc(sizeof(listint_t)); /* allocate node */
 	if (new_node == NULL)
 		return (NULL);
+
 	new_node->n = number; /* put in the data  */
-/* If the Linked List is empty, then make the new node as head */
+	new_node->next = NULL;
+
 	if (*head == NULL)
 	{	*head = new_node;
 		return (new_node);
