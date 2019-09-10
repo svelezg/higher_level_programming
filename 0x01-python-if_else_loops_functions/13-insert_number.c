@@ -11,14 +11,11 @@
  */
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *new_node, *before, *after;
+	listint_t *new_node, *prev, *actual = *head;
 
 	if (head == NULL)
 		return (NULL);
-/* pointers */
-	before = *head;
-	after = *head;
-	after = after->next;
+
 	new_node = malloc(sizeof(listint_t)); /* allocate node */
 	if (new_node == NULL)
 		return (NULL);
@@ -26,27 +23,18 @@ listint_t *insert_node(listint_t **head, int number)
 	new_node->n = number; /* put in the data  */
 	new_node->next = NULL;
 
-	if (*head == NULL)
-	{	*head = new_node;
-		return (new_node);
-	}
-	if (before->n > number)
-	{	new_node->next = before;
+	if (actual == NULL || actual->n > number) /* no head and at beginning */
+	{	new_node->next = actual;
 		*head = new_node;
 		return (new_node);
 	}
-/* Else traverse till position or the last node */
-	while (after->next != NULL)
-	{
-		if (before->n <= number && after->n > number)
-		{	before->next = new_node; /* Change the next of before node */
-			new_node->next = after;  /* point new to after */
-			return (new_node);
-		}
-		before = before->next;
-		after = after->next;
+
+	while (actual && number > actual->n) /* Traverse till pos or last node */
+	{	prev = actual;
+		actual = actual->next;
 	}
-	after->next = new_node; /* Change the next of after node */
-	new_node->next = NULL; /* point new to NULL */
+
+	prev->next = new_node; /* Change the next of prev node */
+	new_node->next = actual;  /* point new to after */
 	return (new_node);
 }
