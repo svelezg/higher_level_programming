@@ -22,5 +22,5 @@ if __name__ == "__main__":
         else:
             exit(1)
     else:
-        print("{}".format("Unknown operator. Available operators: +, -, * "))
+        print("{}".format("Unknown operator. Available operators: +, -, * and /"))
         exit(1)
