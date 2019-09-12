@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-import dis
+# #!/usr/bin/python3
+# import dis
 
 
 def magic_calculation(a, b):
@@ -13,4 +13,4 @@ def magic_calculation(a, b):
         c = add(c, i)
     return c
 
-dis.dis(magic_calculation)
+# dis.dis(magic_calculation)
