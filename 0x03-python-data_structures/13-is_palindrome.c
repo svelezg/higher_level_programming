@@ -10,43 +10,32 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *node, *reverse, *rev_head;
+	listint_t *node;
+	int values[9999], i = 0, c = 0;
 
 	if ((!*head) || (!head))
 		return (1);
 
-	/*rev_head = malloc(sizeof(listint_t)); */ /* allocate node */
-	/*if (rev_head == NULL)*/
-	/*	return (1);*/
-
 	node = *head;
-	rev_head = *head;
-	node = node->next;
+	if (!node->next)
+		return (1);
 
 	while (node)
 	{
-		reverse = malloc(sizeof(listint_t)); /* allocate node */
-		if (reverse == NULL)
-			return (1);
-
-		reverse->n = node->n; /* put in the data  */
-		reverse->next = rev_head;
+		values[i] = node->n;
 		node = node->next;
-		rev_head = reverse;
+		i++;
 	}
-
-	node = *head;
-
-	while (*head)
+	i--;
+	while (i >= 0 && c <= i)
 	{
-		if ((*head)->n != rev_head->n)
+		/* printf("iteration %i=%i %i=%i\n", i, values[i], c, values[c]);*/
+		if (values[i] != values[c])
 		{
-			/*free_listint(rev_head);*/
 			return (0);
 		}
-		*head = (*head)->next;
-		rev_head = rev_head->next;
+		i--;
+		c++;
 	}
-	/*free_listint(rev_head);*/
 	return (1);
 }
