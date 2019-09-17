@@ -15,13 +15,12 @@ int is_palindrome(listint_t **head)
 	if ((!*head) || (!head))
 		return (1);
 
-	node = *head;
-
 	rev_head = malloc(sizeof(listint_t)); /* allocate node */
 	if (rev_head == NULL)
 		return (1);
 
-	rev_head = node;
+	node = *head;
+	rev_head = *head;
 	node = node->next;
 
 	while (node)
@@ -36,14 +35,18 @@ int is_palindrome(listint_t **head)
 		rev_head = reverse;
 	}
 
+	node = *head;
+
 	while (*head)
 	{
-		if ((*head)->n != rev_head->n)
+		if ((*head)->n != reverse->n)
 		{
+			free_listint(rev_head);
 			return (0);
 		}
 		*head = (*head)->next;
-		rev_head = rev_head->next;
+		reverse = reverse->next;
 	}
+	free_listint(rev_head);
 	return (1);
 }
