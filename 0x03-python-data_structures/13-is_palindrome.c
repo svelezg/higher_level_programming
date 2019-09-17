@@ -15,9 +15,9 @@ int is_palindrome(listint_t **head)
 	if ((!*head) || (!head))
 		return (1);
 
-	rev_head = malloc(sizeof(listint_t)); /* allocate node */
-	if (rev_head == NULL)
-		return (1);
+	/*rev_head = malloc(sizeof(listint_t)); /* allocate node */
+	/*if (rev_head == NULL)*/
+	/*	return (1);*/
 
 	node = *head;
 	rev_head = *head;
