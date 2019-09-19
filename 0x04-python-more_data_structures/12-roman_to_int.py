@@ -5,7 +5,6 @@ def roman_to_int(roman_string):
     dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     result = 0
     rev = roman_string[::-1]
-    
     for i in range(len(rev)):
         if i != 0 and dict[rev[i - 1]] > dict[rev[i]]:
             result = result - dict[rev[i]]
