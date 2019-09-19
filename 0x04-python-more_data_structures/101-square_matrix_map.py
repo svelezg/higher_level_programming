@@ -1,4 +1,3 @@
 #!/usr/bin/python3
 def square_matrix_map(matrix=[]):
-    # return [[x**2 for x in row] for row in matrix]
-    return [list(map(lambda x: (x*x), row)) for row in matrix]
+    return list(map(lambda row: list(map(lambda x: (x*x), row)), matrix))
