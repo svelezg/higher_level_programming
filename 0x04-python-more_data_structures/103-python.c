@@ -1,16 +1,14 @@
 #include <Python.h>
-#include <stdlib.h>
 #include <stdio.h>
-#include <stddef.h>
 
 void print_python_bytes(PyObject *p);
 
 /**
- * print_python_list_info- Prints some basic info about Python lists.
+ * print_python_list- Prints some basic info about Python lists.
  * @p: PyObject
  */
 
-void print_python_list(__attribute__((unused))PyObject * p)
+void print_python_list(PyObject *p)
 {
 	int i;
 
@@ -19,12 +17,17 @@ void print_python_list(__attribute__((unused))PyObject * p)
 	printf("[*] Allocated = %ld\n", ((PyListObject *)p)->allocated);
 
 	for (i = 0; i < PyList_Size(p); i++)
+	{
 		printf("Element %d: %s\n", i, PyList_GET_ITEM(p, i)->ob_type->tp_name);
 		if (!strcmp(PyList_GET_ITEM(p, i)->ob_type->tp_name, "bytes"))
 			print_python_bytes(PyList_GET_ITEM(p, i));
+	}
 }
 
-
+/**
+ * print_python_bytes - prints some basic info about python lists
+ * @p: address of pyobject struct
+ */
 void print_python_bytes(PyObject *p)
 {
 	int i, bshow;
