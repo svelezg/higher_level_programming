@@ -68,8 +68,10 @@ class Square:
     def __str__(self):
         """ """
         if self.__size <= 0:
-            return ""
+            return "\n"
         else:
             return (self.__position[1] * "\n" +
-                    self.__size * (self.__position[0] * " " +
-                    self.__size * "#" + "\n"))
+                    (self.__size - 1) * (self.__position[0] * " " +
+                    self.__size * "#" + "\n") +
+                    self.__position[0] * " " +
+                    self.__size * "#")
