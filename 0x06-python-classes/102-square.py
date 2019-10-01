@@ -30,7 +30,7 @@ class Square:
 
     def __lt__(self, other):
         "compares areas"
-        if(self.area() < other.area()):
+        if((self.__size ** 2) < (other.__size ** 2)):
             return True
 
     def __gt__(self, other):
