@@ -1,7 +1,6 @@
 # #!/usr/bin/python3
 # import dis
 
-
 class MagicClass:
 
     def __init__(self, radius=0):
@@ -10,9 +9,9 @@ class MagicClass:
         self.__radius = radius
 
     def area(self):
-        return pi() * self.__radius ** 2
+        return math.pi() * self.__radius ** 2
 
     def circumference(self):
-        return 2 * pi() * self.__radius
+        return 2 * math.pi() * self.__radius
 
 # dis.dis(MagicClass)
