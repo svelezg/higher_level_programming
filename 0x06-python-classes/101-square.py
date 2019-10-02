@@ -17,6 +17,16 @@ class Square:
                                 "tuple of 2 positive integers")
         self.__position = position
 
+    def __str__(self):
+        """ """
+        if self.__size <= 0:
+            return ""
+        else:
+            return (self.__position[1] * "\n" +
+                    (self.__size - 1) * (self.__position[0] * " " +
+                    self.__size * "#" + "\n") + self.__position[0] * " " +
+                    self.__size * "#")
+
     @property
     def size(self):
         """getter for size"""
@@ -64,14 +74,3 @@ class Square:
                 for i in range(self.__size):
                     print("#", end="")
                 print()
-
-    def __str__(self):
-        """ """
-        if self.__size <= 0:
-            return "\n"
-        else:
-            return (self.__position[1] * "\n" +
-                    (self.__size - 1) * (self.__position[0] * " " +
-                    self.__size * "#" + "\n") +
-                    self.__position[0] * " " +
-                    self.__size * "#")
