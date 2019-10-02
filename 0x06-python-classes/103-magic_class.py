@@ -2,6 +2,7 @@
 # import dis
 import math
 
+
 class MagicClass:
     """defines a circle"""
 
@@ -10,11 +11,6 @@ class MagicClass:
         if (type(radius) is not int and type(radius) is not float):
             raise TypeError("radius must be a number")
         self.__radius = radius
-
-    @property
-    def radius(self):
-        """property to retrieve it"""
-        return self.__radius
 
     def area(self):
         return math.pi * self.__radius ** 2
