@@ -48,3 +48,14 @@ Test cases:
     >>> add_integer(0)
     98
 
+    09 Infinite float
+    >>> add_integer(float('-inf'), float('inf'))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    09 Infinite float
+    >>> add_integer(float('nan'), 0)
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
