@@ -1,0 +1,114 @@
+The ``101-lazy_matrix_mul`` module
+======================
+
+Using ``lazy_matrix_mul``
+-------------------
+
+This is a text file in reStructuredText format.  
+First import ``lazy_matrix_mul`` from the ``101-lazy_matrix_mul`` module:
+
+    00 101-lazy_matrix_mul exist
+    >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Test cases:
+
+    01 Square matrices
+    >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[ 7 10]
+     [15 22]]
+
+    01 Square matrices floats
+    >>> print(lazy_matrix_mul([[1.00000, 2], [3, 4]], [[1, 2.000000], [3.0000000, 4]]))
+    [[  7.  10.]
+     [ 15.  22.]]
+
+
+    01 Non square matrix
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]])) 
+    [[13 16]]
+
+    01 Non list a-m
+    >>> print(lazy_matrix_mul('string', [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
+
+
+    01 Non list b-m
+    >>> print(lazy_matrix_mul([[1, 2]], 'string'))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+    01 Non list a-m
+    >>> print(lazy_matrix_mul(['string'], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
+
+    01 Non list of list b-m
+    >>> print(lazy_matrix_mul([[1, 2]], ['string']))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+    01 Empty list a-m
+    >>> print(lazy_matrix_mul([], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: matrices are not aligned
+
+    01 Empty list a-m
+    >>> print(lazy_matrix_mul([[]], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: matrices are not aligned
+
+    01 Empty b-m
+    >>> print(lazy_matrix_mul([[1, 2]], []))
+    Traceback (most recent call last):
+    ...
+    ValueError: matrices are not aligned
+
+    01 Empty b-m
+    >>> print(lazy_matrix_mul([[1, 2]], [[]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: matrices are not aligned
+
+
+    01 Non number element
+    >>> print(lazy_matrix_mul([[1, 'string']], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
+
+    01 Non number element
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], ['string', 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+    01 Non rectangular
+    >>> print(lazy_matrix_mul([[1, 2], [5, 6, 7, 8]], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_a must be of the same size
+
+    01 Non rectangular
+    >>> print(lazy_matrix_mul([[1, 2], [5, 6]], [[3, 4, 7, 8], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_b must be of the same size
+
+    01 Can be multiplied
+    >>> print(lazy_matrix_mul([[1, 2, 7], [5, 6, 8]], [[3, 4, 7, 8], [5, 6, 56, 30]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: objects are not aligned
+
+    01 Two dimensional
+    >>> print(lazy_matrix_mul([[1, 2, [6, 8]], [5, 6, 8]], [[3, 4, 7, 8], [5, 6, 56, 30]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
