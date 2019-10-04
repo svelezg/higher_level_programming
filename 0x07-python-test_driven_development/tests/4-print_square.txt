@@ -1,0 +1,38 @@
+The ``4-print_square`` module
+======================
+
+Using ``print_square``
+-------------------
+
+This is a text file in reStructuredText format.  
+First import ``print_square`` from the ``4-print_square`` module:
+
+    00 4-print_square exist
+    >>> print_square = __import__('4-print_square').print_square
+
+Test cases:
+
+    01 Correct input
+    >>> print_square(4) #doctest: +SKIP
+    ####
+    ####
+    ####
+    ####
+
+    01 zero size
+    >>> print_square(0) 
+    <BLANKLINE>
+
+    01 Negative size
+    >>> print_square(-689)
+    Traceback (most recent call last):
+    ...
+    ValueError: size must be >= 0
+
+
+    01 Float size
+    >>> print_square(-689.80898)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+

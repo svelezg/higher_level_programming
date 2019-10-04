@@ -1,0 +1,35 @@
+The ``3-say_my_name`` module
+======================
+
+Using ``say_my_name``
+-------------------
+
+This is a text file in reStructuredText format.  
+First import ``matrix_divided`` from the ``2-matrix_divided`` module:
+
+    00 3-say_my_name exist
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+
+Test cases:
+
+    01 Correct input
+    >>> say_my_name("John", "Smith")
+    My name is John Smith
+
+    01 Non string first name
+    >>> say_my_name("John")
+    My name is John 
+
+    01 Non string first name
+    >>> say_my_name(200, "Smith")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    01 Non string first name
+    >>> say_my_name("John", 200)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+

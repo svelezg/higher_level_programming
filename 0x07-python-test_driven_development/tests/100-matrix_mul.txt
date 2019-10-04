@@ -1,0 +1,108 @@
+The ``100-matrix_mul`` module
+======================
+
+Using ``matrix_mul``
+-------------------
+
+This is a text file in reStructuredText format.  
+First import ``matrix_mul`` from the ``100-matrix_mul`` module:
+
+    00 100-matrix_mul exist
+    >>> matrix_mul = __import__('100-matrix_mul').matrix_mul
+
+Test cases:
+
+    01 Square matrices
+    >>> print(matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[7, 10], [15, 22]]
+
+    01 Square matrices floats
+    >>> print(matrix_mul([[1.00000, 2], [3, 4]], [[1, 2.000000], [3.0000000, 4]]))
+    [[7.0, 10.0], [15.0, 22.0]]
+
+
+    01 Non square matrix
+    >>> print(matrix_mul([[1, 2]], [[3, 4], [5, 6]])) 
+    [[13, 16]]
+
+    01 Non list a-m
+    >>> print(matrix_mul('string', [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a must be a list
+
+    01 Non list b-m
+    >>> print(matrix_mul([[1, 2]], 'string'))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b must be a list
+
+    01 Non list a-m
+    >>> print(matrix_mul(['string'], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a must be a list of lists
+
+    01 Non list of list b-m
+    >>> print(matrix_mul([[1, 2]], ['string']))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b must be a list of lists
+
+    01 Empty list a-m
+    >>> print(matrix_mul([], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a can't be empty
+
+    01 Empty list a-m
+    >>> print(matrix_mul([[]], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a can't be empty
+
+    01 Empty b-m
+    >>> print(matrix_mul([[1, 2]], []))
+    Traceback (most recent call last):
+    ...
+    ValueError: m_b can't be empty
+
+    01 Empty b-m
+    >>> print(matrix_mul([[1, 2]], [[]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: m_b can't be empty
+
+
+    01 Non number element
+    >>> print(matrix_mul([[1, 'string']], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a should contain only integers or floats
+
+
+    01 Non number element
+    >>> print(matrix_mul([[1, 2]], [[3, 4], ['string', 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+
+    01 Non rectangular
+    >>> print(matrix_mul([[1, 2], [5, 6, 7, 8]], [[3, 4], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_a must be of the same size
+
+    01 Non rectangular
+    >>> print(matrix_mul([[1, 2], [5, 6]], [[3, 4, 7, 8], [5, 6]]))
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_b must be of the same size
+
+
+    01 Can be multiplied
+    >>> print(matrix_mul([[1, 2, 7], [5, 6, 8]], [[3, 4, 7, 8], [5, 6, 56, 30]]))
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a and m_b can't be multiplied

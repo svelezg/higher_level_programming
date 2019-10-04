@@ -1,0 +1,50 @@
+The ``0-add_integer`` module
+======================
+
+Using ``add_integer``
+-------------------
+
+This is a text file in reStructuredText format.  
+First import ``add_integer`` from the ``0-add_integer`` module:
+
+    00 0-add_integer exist
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Test cases:
+
+    01 Positive integers
+    >>> add_integer(1, 2)
+    3
+
+    02 Return type when integers
+    >>> type(add_integer(1, 2))
+    <class 'int'>
+
+    03 Argument a positive Float and argument b negative Float
+    >>> add_integer(100.00, -2.000)
+    98
+
+    04 Only one argument
+    >>> add_integer(2)
+    100
+
+    05 Return Type
+    >>> type(add_integer(100.3, -2.0000787))
+    <class 'int'>
+
+    07 None a argument
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    06 Non integer or float b argument
+    >>> add_integer(4, "string")
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
+
+    08 Adecuate default b
+    >>> add_integer(0)
+    98
+
