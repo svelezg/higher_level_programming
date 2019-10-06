@@ -23,7 +23,7 @@ class TestMaxInteger(unittest.TestCase):
         self.assertEqual(max_integer([1, -2, -3, -4]), 1)
 
     def test_neg(self):
-        self.assertEqual(max_integer([1, -2, 999, -4]), 999)
+        self.assertEqual(max_integer([1, 999, -4]), 999)
 
 
 if __name__ == '__main__':
