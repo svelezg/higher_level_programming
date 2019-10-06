@@ -18,11 +18,8 @@ def print_square(size):
         raise ValueError("size must be >= 0")
 
     str = ""
-    if size == 0:
-        print()
-    else:
-        for i in range(size):
-            for j in range(size):
-                str += '#'
-            str += '\n'
-        print(str[:-1])
+    for i in range(size):
+        for j in range(size):
+            str += '#'
+        str += '\n'
+    print(str , end="")
