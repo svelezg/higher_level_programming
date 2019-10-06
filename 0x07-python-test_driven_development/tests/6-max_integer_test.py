@@ -22,11 +22,11 @@ class TestMaxInteger(unittest.TestCase):
     def test_neg(self):
         self.assertEqual(max_integer([1, -2, -3, -4]), 1)
 
-    def test_neg(self):
-        self.assertEqual(max_integer([1, 999, -4]), 999)
-
     def test_middle(self):
         self.assertEqual(max_integer([1, 3, 8, 2, 6]), 8)
+
+    def test_neg(self):
+        self.assertEqual(max_integer([1, 999, -4]), 999)
 
 if __name__ == '__main__':
     unittest.main()
