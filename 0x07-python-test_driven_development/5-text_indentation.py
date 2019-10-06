@@ -21,9 +21,11 @@ def text_indentation(text):
         if (text[i] in symbols):
             string += text[i] + '\n\n'
         else:
-            if (i != 0 and (text[i - 1] in symbols) and text[i] is ' '):
-                pass
+            if (i != 0 and
+                (text[i - 1] in symbols or text[i - 1] is ' ') and
+               text[i] is ' '):
+                    pass
             else:
-                string += text[i]
+                    string += text[i]
 
     print(string, end="")
