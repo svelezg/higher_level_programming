@@ -13,7 +13,7 @@ First import ``print_square`` from the ``4-print_square`` module:
 Test cases:
 
     01 Correct input
-    >>> print_square(4) #doctest: +SKIP
+    >>> print_square(4)
     ####
     ####
     ####
@@ -21,7 +21,6 @@ Test cases:
 
     01 zero size
     >>> print_square(0) 
-    <BLANKLINE>
 
     01 Negative size
     >>> print_square(-689)
@@ -35,4 +34,9 @@ Test cases:
     Traceback (most recent call last):
     ...
     TypeError: size must be an integer
+
+    Missing argument
+    >>> print_square()
+    Traceback (most recent call last):
+    TypeError: print_square() missing 1 required positional argument: 'size'
 
