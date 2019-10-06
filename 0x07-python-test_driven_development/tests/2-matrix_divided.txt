@@ -90,3 +90,39 @@ Test cases:
     ...     [4, 5, 6]
     ... ], 2)[0])
     <class 'list'>
+
+
+    Edge cases:
+    -----------------------
+
+    01 Integer divided by a string
+    >>> print(matrix_divided([
+    ...     [1, 2, 3],
+    ...     [4, 5, 6]
+    ... ], "string"))
+    Traceback (most recent call last):
+    ...
+    TypeError: div must be a number
+
+    01 Integer divided by an inf
+    >>> print(matrix_divided([
+    ...     [1, 2, 3],
+    ...     [4, 5, 6]
+    ... ], float('inf')))
+    [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+    01 Missing one argument
+    >>> print(matrix_divided([
+    ...     [1, 2, 3],
+    ...     [4, 5, 6]
+    ... ]))
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+
+    01 Missing two arguments
+    >>> print(matrix_divided())
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
