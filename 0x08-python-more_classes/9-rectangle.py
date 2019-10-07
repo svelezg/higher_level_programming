@@ -68,7 +68,7 @@ class Rectangle:
             return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """ """
+        """end user output"""
         if self.__width == 0 or self.__height == 0:
             return ""
         else:
@@ -78,9 +78,10 @@ class Rectangle:
                     self.__width * str(self.print_symbol))
 
     def __repr__(self):
-        """ """
+        """object reproduction"""
         return 'Rectangle(' + str(self.width) + ', ' + str(self.height) + ')'
 
     def __del__(self):
+        """"delete magic method"""
         Rectangle.number_of_instances -= 1
         print('Bye rectangle...')
