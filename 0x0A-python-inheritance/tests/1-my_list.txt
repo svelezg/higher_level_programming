@@ -1,0 +1,53 @@
+The ``1-my_list`` module
+======================
+
+Using ``my_list``
+-------------------
+
+This is a text file in reStructuredText format.  
+First import ``my_list`` from the ``1-my_list`` module:
+
+    00 1-my_list exist
+    >>> MyList = __import__('1-my_list').MyList
+
+Test cases:
+
+    empty my_list
+    >>> MyList.print_sorted([])
+    []
+
+    sorted list
+    >>> MyList.print_sorted([0, 1, 2, 3, 4])
+    [0, 1, 2, 3, 4]
+
+    unsorted list
+    >>> MyList.print_sorted([4, 3, 2, 1, 0])
+    [0, 1, 2, 3, 4]
+
+    non integer element
+    >>> MyList.print_sorted([[1, 2], 3, 2, 1, 0])
+    Traceback (most recent call last):
+    ...
+    TypeError: unorderable types: int() < list()
+
+    repeted elements
+    >>> MyList.print_sorted([1, 1, 3, 2, 1, 0])
+    [0, 1, 1, 1, 2, 3]
+
+    negative elements
+    >>> MyList.print_sorted([1, 1, -3, 2, 1, -4])
+    [-4, -3, 1, 1, 1, 2]
+
+
+    is instance
+    >>> isinstance(MyList([]), list)
+    True
+
+    type
+    >>> type(MyList([]))
+    <class '1-my_list.MyList'>
+
+
+    is subclass
+    >>> issubclass(MyList, list)
+    True
