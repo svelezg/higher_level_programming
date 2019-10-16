@@ -12,7 +12,7 @@ class Student:
 
     def to_json(self, attrs=None):
         """retrieves a dictionary representation of a Student instance"""
-        if attrs:
+        if attrs is not None:
             return {key: value for key,
                     value in self.__dict__.items() if key in attrs}
         else:
