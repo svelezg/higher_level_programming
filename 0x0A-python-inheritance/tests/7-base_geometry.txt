@@ -12,6 +12,9 @@ First import ``base_geometry`` from the ``7-base_geometry`` module:
 
 Test cases:
 
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("my_int", 12)
+
     correct input
     >>> BaseGeometry().integer_validator("my_int", 12)
 
@@ -52,9 +55,40 @@ Test cases:
     empty string value
     >>> BaseGeometry().integer_validator("", 4)
 
-
     subtype
     >>> BaseGeometry().integer_validator("width", True)
     Traceback (most recent call last):
     ...
     TypeError: width must be an integer
+
+    >>> BaseGeometry.area()
+    Traceback (most recent call last):
+    ...
+    TypeError: area() missing 1 required positional argument: 'self'
+
+    >>> BaseGeometry.area(5)
+    Traceback (most recent call last):
+    ...
+    Exception: area() is not implemented
+
+    >>> BaseGeometry().integer_validator('age', (4,))
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    test
+    >>> BaseGeometry().integer_validator('age', [4])
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    test
+    >>> BaseGeometry().integer_validator('age', None)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
+    >>> BaseGeometry().integer_validator('age', {3, 4})
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
