@@ -43,7 +43,7 @@ class Square(Rectangle):
         """assigns an argument to each attribute"""
         var = ['id', 'size', 'x', 'y']
         if len(args) != 0 and args[0] is not "":
-            for i in range(len(args)):
+            for i in range(min(len(args), len(var))):
                 setattr(self, var[i], args[i])
         else:
             for key, value in kwargs.items():
