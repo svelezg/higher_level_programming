@@ -6,6 +6,7 @@ It supplies one class, rectangle.
 
 from models.base import Base
 
+
 class Rectangle(Base):
     """Rectangle class"""
 
@@ -88,15 +89,24 @@ class Rectangle(Base):
                 print("#", end="")
             print()
 
-
     def __str__(self):
         """end user output"""
         return ("[Rectangle] " + "(" + str(self.id) + ") " +
                 str(self.__x) + "/" + str(self.__y) + " - " +
                 str(self.__width) + "/" + str(self.__height))
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """assigns an argument to each attribute"""
         var = ['id', 'width', 'height', 'x', 'y']
-        for i in range(len(args)):
-            setattr(self, var[i], args[i])
+        if len(args) != 0 and args[0] is not "":
+            for i in range(len(args)):
+                setattr(self, var[i], args[i])
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
+    def to_dictionary(self):
+        """"returns the dictionary representation of a Rectangle"""
+        attributes = ["id", "width", "height", "x", "y"]
+        values = [self.id, self.width, self.height, self.x, self.y]
+        return dict(zip(attributes, values))
