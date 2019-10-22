@@ -168,3 +168,6 @@ class Base:
                 turtle.forward(sqr.height)
                 turtle.left(90)
             turtle.end_fill()
+
+        turtle.mainloop()
+

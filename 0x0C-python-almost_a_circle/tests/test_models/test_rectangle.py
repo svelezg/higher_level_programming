@@ -9,6 +9,7 @@ from io import StringIO
 import io
 from models.base import Base
 from models.rectangle import Rectangle
+import os
 
 
 class TestRectangle(unittest.TestCase):
@@ -848,6 +849,7 @@ class TestRectangle(unittest.TestCase):
                 print("{}".format(rect))
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
+        self.addCleanup(os.remove, 'Rectangle.csv')
 
     def test_load_from_file_rectangle(self):
         r1 = Rectangle(10, 7, 2, 8)
@@ -863,6 +865,7 @@ class TestRectangle(unittest.TestCase):
                 print("{}".format(rect))
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
+        self.addCleanup(os.remove, 'Rectangle.json')
 
     def test_create_rect(self):
         r1 = Rectangle(3, 5, 1)
@@ -887,3 +890,20 @@ class TestRectangle(unittest.TestCase):
             print("[{}] {}".format(type(list_output), list_output))
             output2 = temp_stdout.getvalue().strip()
         self.assertEqual(output1, output2)
+
+    def test_save_to_file_rect(self):
+        r1 = Rectangle(1, 1)
+        Rectangle.save_to_file([r1])
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            with open("Rectangle.json", "r") as file:
+                print(file.read())
+            output = temp_stdout.getvalue().strip()
+        self.assertEqual(type(output), str)
+        self.addCleanup(os.remove, 'Rectangle.json')
+
+    def test_to_json_string(self):
+        r1 = Rectangle(10, 7, 2, 8)
+        dictionary = r1.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        self.assertEqual(str, type(json_dictionary))

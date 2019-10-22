@@ -10,6 +10,7 @@ import io
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
+import os
 
 
 class TestSquare(unittest.TestCase):
@@ -668,22 +669,23 @@ class TestSquare(unittest.TestCase):
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
         Base._Base__nb_objects = 0
+        self.addCleanup(os.remove, 'Square.csv')
 
     def test_load_from_file_square(self):
         s1 = Square(5)
         s2 = Square(7, 9, 1)
         list_squares_input = [s1, s2]
         Square.save_to_file(list_squares_input)
-        list_squares_output = Square.load_from_file_csv()
-        target = "[Square] (1) 0/0 - 5\n" + \
-                 "[Square] (2) 9/1 - 7"
+        list_squares_output = Square.load_from_file()
+        target = "[Square] (1) 0/0 - 5" + "\n" + "[Square] (2) 9/1 - 7"
         temp_stdout = StringIO()
         with contextlib.redirect_stdout(temp_stdout):
             for sqr in list_squares_output:
-                print("{}".format(sqr))
+                print(sqr)
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
         Base._Base__nb_objects = 0
+        self.addCleanup(os.remove, 'Square.json')
 
     def test_create_sqr(self):
         s1 = Square(3, 5)
