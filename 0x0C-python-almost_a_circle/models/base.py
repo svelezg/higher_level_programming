@@ -91,7 +91,6 @@ class Base:
         aux = {}
         with open(filename, 'w') as f:
             if list_objs is None or list_objs == []:
-                f.write("[]")
                 return
             else:
                 if cls.__name__ == 'Rectangle':
