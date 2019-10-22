@@ -9,7 +9,6 @@ from io import StringIO
 import io
 from models.base import Base
 from models.rectangle import Rectangle
-import os
 
 
 class TestRectangle(unittest.TestCase):
@@ -849,7 +848,6 @@ class TestRectangle(unittest.TestCase):
                 print("{}".format(rect))
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
-        self.addCleanup(os.remove, 'Rectangle.csv')
 
     def test_load_from_file_rectangle(self):
         r1 = Rectangle(10, 7, 2, 8)
@@ -865,7 +863,6 @@ class TestRectangle(unittest.TestCase):
                 print("{}".format(rect))
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
-        self.addCleanup(os.remove, 'Rectangle.json')
 
     def test_create_rect(self):
         r1 = Rectangle(3, 5, 1)
@@ -900,7 +897,6 @@ class TestRectangle(unittest.TestCase):
                 print(file.read())
             output = temp_stdout.getvalue().strip()
         self.assertEqual(type(output), str)
-        self.addCleanup(os.remove, 'Rectangle.json')
 
     def test_to_json_string(self):
         r1 = Rectangle(10, 7, 2, 8)

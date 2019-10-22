@@ -10,7 +10,6 @@ import io
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
-import os
 
 
 class TestSquare(unittest.TestCase):
@@ -669,7 +668,6 @@ class TestSquare(unittest.TestCase):
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
         Base._Base__nb_objects = 0
-        self.addCleanup(os.remove, 'Square.csv')
 
     def test_load_from_file_square(self):
         s1 = Square(5)
@@ -685,7 +683,6 @@ class TestSquare(unittest.TestCase):
             output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
         Base._Base__nb_objects = 0
-        self.addCleanup(os.remove, 'Square.json')
 
     def test_create_sqr(self):
         s1 = Square(3, 5)
