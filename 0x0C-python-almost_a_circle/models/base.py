@@ -86,8 +86,9 @@ class Base:
         header_list_sq = ['id', 'size', 'x', 'y']
         aux = {}
         with open(filename, 'w') as f:
-            if list_objs is None:
-                return []
+            if list_objs is None or list_objs == []:
+                f.write("[]")
+                return
             else:
                 if cls.__name__ == 'Rectangle':
                     writer = csv.DictWriter(f, fieldnames=header_list_rec)
