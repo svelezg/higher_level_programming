@@ -33,17 +33,27 @@ class TestRectangle(unittest.TestCase):
 
     def test_rectangle_arg(self):
         self.assertRaises(TypeError, Rectangle)
-        # self.assertRaisesRegex(TypeError,
-        #                      "__init__() missing 2 required positional arguments: 'width' and 'height'",
-        #                     Rectangle)
+        """
+        self.assertRaisesRegex(TypeError,
+                              "__init__() missing 2 required positional
+                              arguments:
+                              'width' and 'height'",
+                             Rectangle)
+        """
         self.assertRaises(TypeError, Rectangle, 1)
-        # self.assertRaisesRegex(TypeError,
-        #                      "__init__() missing 1 required positional argument: 'height'",
-        #                     Rectangle, 1)
+        """
+        self.assertRaisesRegex(TypeError,
+                              "__init__() missing 1 required
+                              positional argument: 'height'",
+                             Rectangle, 1)
+        """
         self.assertRaises(TypeError, Rectangle, 1, 1, 1, 1, 1, 1)
-        # self.assertRaisesRegex(TypeError,
-        #                      "__init__() takes from 3 to 6 positional arguments but 7 were given",
-        #                     Rectangle, 1, 1, 1, 1, 1)
+        """
+        self.assertRaisesRegex(TypeError,
+                              "__init__() takes from 3 to 6 positional
+                              arguments but 7 were given",
+                             Rectangle, 1, 1, 1, 1, 1)
+        """
         Base._Base__nb_objects = 0
 
     def test_id(self):
@@ -63,12 +73,14 @@ class TestRectangle(unittest.TestCase):
 
     def test_width_string(self):
         self.assertRaises(TypeError, Rectangle, "string", 1)
-        self.assertRaisesRegex(TypeError, "width must be an integer", Rectangle, "string", 1)
+        self.assertRaisesRegex(TypeError, "width must be an integer",
+                               Rectangle, "string", 1)
         Base._Base__nb_objects = 0
 
     def test_width_neg(self):
         self.assertRaises(ValueError, Rectangle, -1, 1)
-        self.assertRaisesRegex(ValueError, "width must be > 0", Rectangle, -1, 1)
+        self.assertRaisesRegex(ValueError, "width must be > 0",
+                               Rectangle, -1, 1)
         Base._Base__nb_objects = 0
 
     def test_height(self):
@@ -83,12 +95,14 @@ class TestRectangle(unittest.TestCase):
 
     def test_height_string(self):
         self.assertRaises(TypeError, Rectangle, 1, "string")
-        self.assertRaisesRegex(TypeError, "height must be an integer", Rectangle, 1, "string")
+        self.assertRaisesRegex(TypeError, "height must be an integer",
+                               Rectangle, 1, "string")
         Base._Base__nb_objects = 0
 
     def test_height_neg(self):
         self.assertRaises(ValueError, Rectangle, 1, -1)
-        self.assertRaisesRegex(ValueError, "height must be > 0", Rectangle, 1, -1)
+        self.assertRaisesRegex(ValueError, "height must be > 0",
+                               Rectangle, 1, -1)
         Base._Base__nb_objects = 0
 
     def test_x(self):
@@ -103,12 +117,14 @@ class TestRectangle(unittest.TestCase):
 
     def test_x_string(self):
         self.assertRaises(TypeError, Rectangle, 1, 1, "string")
-        self.assertRaisesRegex(TypeError, "x must be an integer", Rectangle, 1, 1, "string")
+        self.assertRaisesRegex(TypeError, "x must be an integer",
+                               Rectangle, 1, 1, "string")
         Base._Base__nb_objects = 0
 
     def test_x_neg(self):
         self.assertRaises(ValueError, Rectangle, 1, 1, -1)
-        self.assertRaisesRegex(ValueError, "x must be >= 0", Rectangle, 1, 1, -1)
+        self.assertRaisesRegex(ValueError, "x must be >= 0",
+                               Rectangle, 1, 1, -1)
         Base._Base__nb_objects = 0
 
     def test_y(self):
@@ -123,12 +139,14 @@ class TestRectangle(unittest.TestCase):
 
     def test_y_string(self):
         self.assertRaises(TypeError, Rectangle, 1, 1, 1, "string")
-        self.assertRaisesRegex(TypeError, "y must be an integer", Rectangle, 1, 1, 1, "string")
+        self.assertRaisesRegex(TypeError, "y must be an integer",
+                               Rectangle, 1, 1, 1, "string")
         Base._Base__nb_objects = 0
 
     def test_y_neg(self):
         self.assertRaises(ValueError, Rectangle, 1, 1, 1, -1)
-        self.assertRaisesRegex(ValueError, "y must be >= 0", Rectangle, 1, 1, 1, -1)
+        self.assertRaisesRegex(ValueError, "y must be >= 0",
+                               Rectangle, 1, 1, 1, -1)
         Base._Base__nb_objects = 0
 
     def test_automatic(self):
@@ -228,9 +246,12 @@ class TestRectangle(unittest.TestCase):
     def test_display_arg(self):
         r1 = Rectangle(1, 1, 1, 1)
         self.assertRaises(TypeError, r1.display, 1)
-        # self.assertRaisesRegex(TypeError,
-        #                      'display() takes 1 positional argument but 2 were given',
-        #                     r1.display, 1)
+        """
+        self.assertRaisesRegex(TypeError,
+                              'display() takes 1 positional
+                              argument but 2 were given',
+                             r1.display, 1)
+        """
         Base._Base__nb_objects = 0
 
     def test_str(self):
@@ -812,3 +833,57 @@ class TestRectangle(unittest.TestCase):
         obj.update(3, 4, 5, 6, 7)
         target = {'id': 3, 'width': 4, 'height': 5, 'x': 6, 'y': 7}
         self.assertDictEqual(obj.to_dictionary(), target)
+
+    def test_load_from_file_csv_rectangle(self):
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file_csv(list_rectangles_input)
+        list_rectangles_output = Rectangle.load_from_file_csv()
+        target = "[Rectangle] (1) 2/8 - 10/7\n" +\
+                 "[Rectangle] (2) 0/0 - 2/4"
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            for rect in list_rectangles_output:
+                print("{}".format(rect))
+            output = temp_stdout.getvalue().strip()
+        self.assertEqual(output, target)
+
+    def test_load_from_file_rectangle(self):
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file(list_rectangles_input)
+        list_rectangles_output = Rectangle.load_from_file()
+        target = "[Rectangle] (1) 2/8 - 10/7\n" + \
+                 "[Rectangle] (2) 0/0 - 2/4"
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            for rect in list_rectangles_output:
+                print("{}".format(rect))
+            output = temp_stdout.getvalue().strip()
+        self.assertEqual(output, target)
+
+    def test_create_rect(self):
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertFalse(r1 == r2)
+        self.assertFalse(r1 is r2)
+
+    def test_from_json_string_rect(self):
+        list_input = [
+            {'id': 89, 'width': 10, 'height': 4},
+            {'id': 7, 'width': 1, 'height': 7}
+        ]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_input), list_input))
+            output1 = temp_stdout.getvalue().strip()
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_output), list_output))
+            output2 = temp_stdout.getvalue().strip()
+        self.assertEqual(output1, output2)

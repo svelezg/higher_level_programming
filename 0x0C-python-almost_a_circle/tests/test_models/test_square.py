@@ -27,13 +27,19 @@ class TestSquare(unittest.TestCase):
 
     def test_Square_arg(self):
         self.assertRaises(TypeError, Square)
-        # self.assertRaisesRegex(TypeError,
-        #                      "__init__() missing 2 required positional arguments: 'width' and 'height'",
-        #                     Square)
+        """
+        self.assertRaisesRegex(TypeError,
+                              "__init__() missing 2 required positional
+                              arguments: 'width' and 'height'",
+                             Square)
+        """
         self.assertRaises(TypeError, Square, 1, 1, 1, 1, 1, 1)
-        # self.assertRaisesRegex(TypeError,
-        #                      "__init__() takes from 2 to 5 positional arguments but 7 were given",
-        #                     Square, 1, 1, 1, 1, 1)
+        """
+        self.assertRaisesRegex(TypeError,
+                              "__init__() takes from 2 to 5 positional
+                              arguments but 7 were given",
+                             Square, 1, 1, 1, 1, 1)
+        """
         Base._Base__nb_objects = 0
 
     def test_id(self):
@@ -53,12 +59,14 @@ class TestSquare(unittest.TestCase):
 
     def test_size_string(self):
         self.assertRaises(TypeError, Square, "string")
-        self.assertRaisesRegex(TypeError, "width must be an integer", Square, "string")
+        self.assertRaisesRegex(TypeError, "width must be an integer",
+                               Square, "string")
         Base._Base__nb_objects = 0
 
     def test_size_neg(self):
         self.assertRaises(ValueError, Square, -1)
-        self.assertRaisesRegex(ValueError, "width must be > 0", Square, -1)
+        self.assertRaisesRegex(ValueError, "width must be > 0",
+                               Square, -1)
         Base._Base__nb_objects = 0
 
     def test_height(self):
@@ -93,12 +101,14 @@ class TestSquare(unittest.TestCase):
 
     def test_x_string(self):
         self.assertRaises(TypeError, Square, 1, "string")
-        self.assertRaisesRegex(TypeError, "x must be an integer", Square, 1, "string")
+        self.assertRaisesRegex(TypeError, "x must be an integer",
+                               Square, 1, "string")
         Base._Base__nb_objects = 0
 
     def test_x_neg(self):
         self.assertRaises(ValueError, Square, 1, -1)
-        self.assertRaisesRegex(ValueError, "x must be >= 0", Square, 1, -1)
+        self.assertRaisesRegex(ValueError, "x must be >= 0",
+                               Square, 1, -1)
         Base._Base__nb_objects = 0
 
     def test_y(self):
@@ -113,12 +123,14 @@ class TestSquare(unittest.TestCase):
 
     def test_y_string(self):
         self.assertRaises(TypeError, Square, 1, 1, "string")
-        self.assertRaisesRegex(TypeError, "y must be an integer", Square, 1, 1, "string")
+        self.assertRaisesRegex(TypeError, "y must be an integer",
+                               Square, 1, 1, "string")
         Base._Base__nb_objects = 0
 
     def test_y_neg(self):
         self.assertRaises(ValueError, Square, 1, 1, -1)
-        self.assertRaisesRegex(ValueError, "y must be >= 0", Square, 1, 1, -1)
+        self.assertRaisesRegex(ValueError, "y must be >= 0",
+                               Square, 1, 1, -1)
         Base._Base__nb_objects = 0
 
     def test_automatic(self):
@@ -218,9 +230,12 @@ class TestSquare(unittest.TestCase):
     def test_display_arg(self):
         s1 = Square(1, 1, 1)
         self.assertRaises(TypeError, s1.display, 1)
-        # self.assertRaisesRegex(TypeError,
-        #                      'display() takes 1 positional argument but 2 were given',
-        #                     s1.display, 1)
+        """
+        self.assertRaisesRegex(TypeError,
+                              'display() takes 1 positional
+                              argument but 2 were given',
+                             s1.display, 1)
+        """
         Base._Base__nb_objects = 0
 
     def test_str(self):
@@ -638,3 +653,58 @@ class TestSquare(unittest.TestCase):
         target = {'id': 3, 'size': 4, 'x': 5, 'y': 6}
         self.assertDictEqual(obj.to_dictionary(), target)
 
+    def test_load_from_file_csv_square(self):
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        list_squares_input = [s1, s2]
+        Square.save_to_file_csv(list_squares_input)
+        list_squares_output = Square.load_from_file_csv()
+        target = "[Square] (1) 0/0 - 5\n" + \
+                 "[Square] (2) 9/1 - 7"
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            for sqr in list_squares_output:
+                print("{}".format(sqr))
+            output = temp_stdout.getvalue().strip()
+        self.assertEqual(output, target)
+        Base._Base__nb_objects = 0
+
+    def test_load_from_file_square(self):
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        list_squares_input = [s1, s2]
+        Square.save_to_file(list_squares_input)
+        list_squares_output = Square.load_from_file_csv()
+        target = "[Square] (1) 0/0 - 5\n" + \
+                 "[Square] (2) 9/1 - 7"
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            for sqr in list_squares_output:
+                print("{}".format(sqr))
+            output = temp_stdout.getvalue().strip()
+        self.assertEqual(output, target)
+        Base._Base__nb_objects = 0
+
+    def test_create_sqr(self):
+        s1 = Square(3, 5)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertFalse(s1 == s2)
+        self.assertFalse(s1 is s2)
+
+    def test_from_json_string_sqr(self):
+        list_input = [
+            {'id': 89, 'size': 10},
+            {'id': 7, 'size': 7}
+        ]
+        json_list_input = Square.to_json_string(list_input)
+        list_output = Square.from_json_string(json_list_input)
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_input), list_input))
+            output1 = temp_stdout.getvalue().strip()
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_output), list_output))
+            output2 = temp_stdout.getvalue().strip()
+        self.assertEqual(output1, output2)
