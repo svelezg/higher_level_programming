@@ -9,7 +9,6 @@ from io import StringIO
 import io
 from models.base import Base
 from models.rectangle import Rectangle
-import os
 
 
 class TestRectangle(unittest.TestCase):
@@ -863,16 +862,6 @@ class TestRectangle(unittest.TestCase):
             for rect in list_rectangles_output:
                 print("{}".format(rect))
             output = temp_stdout.getvalue().strip()
-        self.assertEqual(output, target)
-
-    def test_load_from_file_nofile(self):
-        os.remove('Rectangle.json')
-        list_rectangles_output = Rectangle.load_from_file()
-        target = "[]"
-        temp_stdout = StringIO()
-        with contextlib.redirect_stdout(temp_stdout):
-            print(list_rectangles_output)
-        output = temp_stdout.getvalue().strip()
         self.assertEqual(output, target)
 
     def test_create_rect(self):
