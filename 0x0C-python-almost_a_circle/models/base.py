@@ -37,8 +37,9 @@ class Base:
         filename = cls.__name__ + ".json"
         my_list = []
         with open(filename, 'w', encoding='utf-8') as f:
-            if list_objs is None:
-                return my_list
+            if list_objs is None or list_objs == []:
+                f.write("[]")
+                return
             else:
                 for obj in list_objs:
                     my_list.append(obj.to_dictionary())
