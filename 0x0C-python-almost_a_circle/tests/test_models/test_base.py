@@ -5,6 +5,11 @@ Unittest for Base class
 
 import unittest
 from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
+import io
+import sys
+import os
 
 
 class TestBase(unittest.TestCase):
@@ -99,3 +104,16 @@ class TestBase(unittest.TestCase):
         target = [1, 111, 2, 222, 3, 333]
         failure_msg = '{} and {} are different'.format(ans, target)
         self.assertListEqual(ans, target, msg=failure_msg)
+
+    def test_12_load_from_file(self):
+        """Tests if the method load from file CSV is returning correctly
+        if the file does not exist, it should return an empty list
+        """
+
+        os.remove('Rectangle.csv')
+        new_list_objects = Rectangle.load_from_file_csv()
+        self.assertEqual(new_list_objects, [])
+
+        os.remove('Square.csv')
+        new_list_objects = Square.load_from_file_csv()
+        self.assertEqual(new_list_objects, [])
