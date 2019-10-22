@@ -61,8 +61,8 @@ class Base:
         if cls.__name__ == "Rectangle":
             dummy_instance = cls(1, 1)
         elif cls.__name__ == "Square":
-        dummy_instance = cls(1)
-        cls.update(dummy_instance, **dictionary)
+            dummy_instance = cls(1)
+        dummy_instance.update(dummy_instance, **dictionary)
         return dummy_instance
 
     @classmethod
