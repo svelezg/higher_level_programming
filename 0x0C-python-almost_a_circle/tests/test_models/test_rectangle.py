@@ -888,6 +888,31 @@ class TestRectangle(unittest.TestCase):
             output2 = temp_stdout.getvalue().strip()
         self.assertEqual(output1, output2)
 
+    def test_from_json_string_rect_empty(self):
+        list_input = []
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_input), list_input))
+            output1 = temp_stdout.getvalue().strip()
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_output), list_output))
+            output2 = temp_stdout.getvalue().strip()
+        self.assertEqual(output1, output2)
+
+    def test_from_json_string_rect_none(self):
+        list_input = None
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        temp_stdout = StringIO()
+        output1 = "[<class 'list'>] []"
+        with contextlib.redirect_stdout(temp_stdout):
+            print("[{}] {}".format(type(list_output), list_output))
+            output2 = temp_stdout.getvalue().strip()
+        self.assertEqual(output1, output2)
+
     def test_save_to_file_rect(self):
         r1 = Rectangle(1, 1)
         Rectangle.save_to_file([r1])
@@ -897,6 +922,16 @@ class TestRectangle(unittest.TestCase):
                 print(file.read())
             output = temp_stdout.getvalue().strip()
         self.assertEqual(type(output), str)
+
+    def test_save_to_file_rect_empty(self):
+        my_list = None
+        Rectangle.save_to_file(my_list)
+        temp_stdout = StringIO()
+        with contextlib.redirect_stdout(temp_stdout):
+            with open("Rectangle.json", "r") as file:
+                print(file.read())
+            output = temp_stdout.getvalue().strip()
+        self.assertEqual(output, "[]")
 
     def test_to_json_string(self):
         r1 = Rectangle(10, 7, 2, 8)
