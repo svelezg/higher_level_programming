@@ -7,8 +7,7 @@ import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
-import io
-import sys
+import pep8
 import os
 
 
@@ -117,3 +116,10 @@ class TestBase(unittest.TestCase):
         os.remove('Square.csv')
         new_list_objects = Square.load_from_file_csv()
         self.assertEqual(new_list_objects, [])
+
+        def test_pep8_conformance(self):
+            """Test that we conform to PEP8."""
+            pep8style = pep8.StyleGuide(quiet=True)
+            result = pep8style.check_files(['./models/base.py'])
+            self.assertEqual(result.total_errors, 0,
+                             "Found code style errors (and warnings).")
