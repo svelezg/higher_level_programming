@@ -170,4 +170,3 @@ class Base:
             turtle.end_fill()
 
         turtle.mainloop()
-
