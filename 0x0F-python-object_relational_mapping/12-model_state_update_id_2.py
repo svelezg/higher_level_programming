@@ -24,8 +24,10 @@ if __name__ == "__main__":
     Session.configure(bind=engine)
     session = Session()
 
-    # query = session.query(State).filter(State.name == argv[4]).order_by(State.id).first()
+    # query = session.query(State).filter(State.name == argv[4]).
+    # order_by(State.id).first()
 
-    query = session.query(State).filter(State.id == 2).order_by(State.id).first()
+    query = session.query(State).filter(State.id == 2).\
+        order_by(State.id).first()
     query.name = 'New Mexico'
     session.commit()

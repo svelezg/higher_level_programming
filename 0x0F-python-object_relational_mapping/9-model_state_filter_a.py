@@ -22,8 +22,7 @@ if __name__ == "__main__":
     Session.configure(bind=engine)
     session = Session()
 
-    query = session.query(State).first()
-    if query is None:
-        print('Nothing')
-    else:
-        print('{}: {}'.format(query.id, query.name))
+    query = session.query(State).filter(State.name.ilike('%a%')).\
+        order_by(State.id)
+    for _row in query:
+        print('{}: {}'.format(_row.id, _row.name))

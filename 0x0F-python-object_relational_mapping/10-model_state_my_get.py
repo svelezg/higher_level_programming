@@ -23,10 +23,12 @@ if __name__ == "__main__":
     Session.configure(bind=engine)
     session = Session()
 
-    # query = session.query(State).filter(State.name == argv[4]).order_by(State.id).first()
+    # query = session.query(State).filter(State.name == argv[4]).
+    # order_by(State.id).first()
 
     my_input = argv[4]
-    query = session.query(State).filter(State.name == my_input).order_by(State.id).first()
+    query = session.query(State).filter(State.name == my_input).\
+        order_by(State.id).first()
 
     if query is None:
         print('Not found')
