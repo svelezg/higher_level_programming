@@ -21,8 +21,9 @@ if __name__ == "__main__":
     Session.configure(bind=engine)
     session = Session()
 
-    selection = select('*').select_from(City).order_by(City.id).\
-        group_by(State.id)
-    result = session.execute(selection).fetchall()
-    for _row in result:
-        print('{}: {}'.format(_row.id, _row.name))
+    query = session.query(City, State)\
+        .filter(City.state_id == State.id)\
+        .order_by(City.id.asc()).all()
+
+    for cities, states in query:
+        print("{}: ({}) {}".format(states.name, cities.id, cities.name))
