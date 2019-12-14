@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     name = argv[4]
     cur.execute("""SELECT *
-    FROM states WHEREname = '{}'
+    FROM states WHERE name = '{}'
     ORDER BY id""".format(argv[4]))
 
     rows = cur.fetchall()
