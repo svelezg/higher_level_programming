@@ -18,10 +18,8 @@ if __name__ == "__main__":
                          passwd=my_pass,
                          db=my_db)
     cur = db.cursor()
-
-    cur.execute("""SELECT *
-    FROM states
-    WHERE name = '{}'
+    cur.execute("""SELECT * FROM states
+    WHERE name LIKE BINARY '{:s}'
     ORDER BY states.id ASC""".format(my_state))
 
     rows = cur.fetchall()
