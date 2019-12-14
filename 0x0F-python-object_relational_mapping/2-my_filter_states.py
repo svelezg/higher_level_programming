@@ -10,6 +10,7 @@ if __name__ == "__main__":
     my_user = sys.argv[1]
     my_pass = sys.argv[2]
     my_db = sys.argv[3]
+    my_state = sys.argv[4]
 
     db = MySQLdb.connect(host="localhost",
                          port=3306,
@@ -18,11 +19,10 @@ if __name__ == "__main__":
                          db=my_db)
     cur = db.cursor()
 
-    name = sys.argv[4]
     cur.execute("""SELECT *
     FROM states
     WHERE name = '{}'
-    ORDER BY id""".format(name))
+    ORDER BY states.id ASC""".format(my_state))
 
     rows = cur.fetchall()
     for row in rows:
