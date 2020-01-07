@@ -1,3 +1,3 @@
 #!/bin/bash
-# sends a JSON POST request to a URL passed as the first argument, and displays the body of the response.
-curl -s -H "Content-Type: application/json" -d @"$2" "$1"
+# Catch me if you can!
+curl -sLX PUT -d 'user_id=98' -H 'Origin: HolbertonSchool' 0.0.0.0:5000/catch_me
