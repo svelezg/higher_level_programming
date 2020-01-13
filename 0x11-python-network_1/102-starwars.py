@@ -2,11 +2,12 @@
 """
 takes in a string and sends a search request to the Star Wars API
 """
-if __name__ == "__main__":
-    import requests
-    import sys
+import requests
+import sys
 
-    url = 'https://swapi.co/api/people'
+
+if __name__ == "__main__":
+    url = "https://swapi.co/api/people"
     values = {'search': sys.argv[1]}
     response = requests.get(url, params=values)
     print("Number of results: {}".format(response.json().get("count")))
