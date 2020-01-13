@@ -7,32 +7,20 @@ if __name__ == "__main__":
     import sys
 
     url = 'https://swapi.co/api/people'
-
-    search = sys.argv[1]
-    values = {'search': search}
-
+    values = {'search': sys.argv[1]}
     response = requests.get(url, params=values)
     print("Number of results: {}".format(response.json().get("count")))
-    results = response.json().get("results")
-    for result in results:
+    for result in response.json().get("results"):
         print(result.get("name"))
-        films_url = result.get("films")
-        for film_url in films_url:
-
+        for film_url in result.get("films"):
             film_response = requests.get(film_url)
-            film_results = film_response.json().get("title")
-            print("\t{}".format(film_results))
+            print("\t{}".format(film_response.json().get("title")))
 
-    while 1:
-        if response.json().get("next") is None:
-            break
+    while response.json().get("next"):
         url = response.json().get("next")
         response = requests.get(url, params=values)
-        results = response.json().get("results")
-        for result in results:
+        for result in response.json().get("results"):
             print(result.get("name"))
-            films_url = result.get("films")
-            for film_url in films_url:
+            for film_url in result.get("films"):
                 film_response = requests.get(film_url)
-                film_results = film_response.json().get("title")
-                print("\t{}".format(film_results))
+                print("\t{}".format(film_response.json().get("title")))
