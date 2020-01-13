@@ -8,7 +8,7 @@ if __name__ == "__main__":
     import sys
 
     url = "https://api.github.com/repos/{}/{}/commits".\
-        format(sys.argv[1], sys.argv[2])
+        format(sys.argv[2], sys.argv[1])
     param = {"per_page": "10"}
     response = requests.get(url, params=param)
 
