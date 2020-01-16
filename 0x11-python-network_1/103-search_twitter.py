@@ -40,7 +40,10 @@ if __name__ == "__main__":
     search_resp = requests.get(search_url, headers=search_headers,
                                params=search_params)
 
-    for tweet in search_resp.get("statuses"):
+    tweets = search_resp.json()
+    my_tweets = tweets.get('statuses')
+
+    for tweet in my_tweets:
         print("[{}] {} by {}".format(tweet.get("id"),
                                      tweet.get("text"),
                                      tweet.get("user").get("name")))
